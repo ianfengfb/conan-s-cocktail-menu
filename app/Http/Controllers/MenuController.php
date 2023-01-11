@@ -51,7 +51,7 @@ class MenuController extends Controller
 
         Menu::create($formFields);
 
-        return redirect('/')->with('message', 'Item added to the menu successfully!');
+        return redirect('/menus')->with('message', 'Item added to the menu successfully!');
     }
 
     /**

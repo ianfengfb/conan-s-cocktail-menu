@@ -14,8 +14,12 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::filter(request(['search']))->orderBy('position')->simplePaginate(5);
-        return view('conans.index', ['menus' => $menus]);
+        if (auth()->user()->email == 'conan@conan.com') {
+            $menus = Menu::filter(request(['search']))->orderBy('position')->simplePaginate(5);
+            return view('conans.index', ['menus' => $menus]);
+        } else {
+            return redirect('/customer/menus');
+        }
     }
 
     /**
@@ -117,7 +121,10 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         $menu->delete();
-        return redirect('/menus')->with('message', 'Menu deleted successfully');
+        return response()->json([
+            'status'=>200,
+            'message'=>'Item removed from the menu'
+        ]);
     }
 
       /**
@@ -142,7 +149,11 @@ class MenuController extends Controller
      */
     public function customer_menu()
     {
-        $menus = Menu::filter(request(['search']))->orderBy('position')->simplePaginate(5);
-        return view('customers.index', ['menus' => $menus]);
+        if (auth()->user()->email == 'conan@conan.com') {
+            return redirect('/menus');
+        } else {
+            $menus = Menu::filter(request(['search']))->orderBy('position')->simplePaginate(5);
+            return view('customers.index', ['menus' => $menus]);
+        }
     }
 }

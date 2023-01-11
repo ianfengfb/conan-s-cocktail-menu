@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('photo')->nullable();
-            $table->longText('description');
-            $table->longText('recipe');
+            $table->longText('description')->nullable();;
+            $table->longText('recipe')->nullable();;
             $table->integer('position');
             $table->boolean('available')->default(true);
             $table->timestamps();

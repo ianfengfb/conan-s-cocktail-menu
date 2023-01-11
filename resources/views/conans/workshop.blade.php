@@ -132,11 +132,13 @@
         data: data,
         dataType: "json",
         success: function (response) {
-            if (response.status == 200) {
-                $('#oliphant_id_recipe_content').html(response.recipe);
+                if (response.recipe) {
+                    $('#oliphant_id_recipe_content').html(response.recipe);
+                } else {
+                    $('#oliphant_id_recipe_content').html('No recipe for this item.');
+                }
             }
-        }
-    });
+         });
       })
 
     // accept an order

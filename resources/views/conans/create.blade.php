@@ -41,7 +41,7 @@
 
       <div class="tw-mb-6">
         <label for="description" class="tw-inline-block tw-text-lg tw-mb-2">
-          Short Description (optional)
+          Short Description (optional)(for customers)
         </label>
         <textarea class="tw-border tw-border-gray-200 tw-rounded tw-p-2 tw-w-full" name="description" rows="5"
           placeholder="Leave a short description here...">{{old('description')}}</textarea>
@@ -53,7 +53,7 @@
 
       <div class="tw-mb-6">
         <label for="recipe" class="tw-inline-block tw-text-lg tw-mb-2">
-          Cocoktail recipe (optional)
+          Cocoktail recipe (optional)(only visible to Conan)
         </label>
         <textarea class="tw-border tw-border-gray-200 tw-rounded tw-p-2 tw-w-full" name="recipe" rows="5"
           placeholder="Put cocktail recipe here...">{{old('recipe')}}</textarea>

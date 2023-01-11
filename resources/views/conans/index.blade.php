@@ -17,7 +17,7 @@
 <div class="container">
     <div class="row">
         @foreach ($menus as $menu)  
-        <div class="col-12 col-md-6 col-sm-4 mt-3">
+        <div class="col-12 col-md-4 col-sm-6 mt-3">
             <div class="card">
                 <img src="{{$menu->photo ? asset('storage/' . $menu->photo) : asset('/images/cocktails.jpeg')}}" class="card-img-top" alt="cocktail">
                 <div class="card-body">

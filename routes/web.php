@@ -63,7 +63,7 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 // Show Login Form
-Route::get('/', [UserController::class, 'login'])->name('login')->middleware('guest');
+Route::get('/', [UserController::class, 'login'])->name('login');
 
 // Log In User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
@@ -130,6 +130,9 @@ Route::post('/cart/create', [CartController::class, 'store']);
 
 // read cart
 Route::post('/cart/read', [CartController::class, 'read']);
+
+// remove cart
+Route::delete('/cart/{cart}', [CartController::class, 'remove']);
 
 // show customer orders
 Route::get('/customer/orders', [OrderController::class, 'customer_order']);

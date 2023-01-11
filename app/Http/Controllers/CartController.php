@@ -101,13 +101,19 @@ class CartController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove cart
      *
      * @param  \App\Models\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function remove($cart)
     {
-        //
+        $find_cart = Cart::find($cart);
+        $find_cart->delete();
+        $carts = auth()->user()->carts()->get();
+        return response()->json([
+            'status'=>200,
+            'carts'=>$carts
+        ]);
     }
 }

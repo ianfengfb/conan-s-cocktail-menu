@@ -117,7 +117,7 @@
      $('.recipe_link').on('click', function(e){
         $('#RecipeModal').modal('show');
         var title = $(this).text();
-        $('#oliphant_id_recipe_title').html(title+'recipe');
+        $('#oliphant_id_recipe_title').html(title+' recipe');
         var data = {
             'title': title,
         }
@@ -128,7 +128,7 @@
     });
     $.ajax({
         type: "POST",
-        url: '/menus/recipe/',
+        url: '/menus/recipe',
         data: data,
         dataType: "json",
         success: function (response) {

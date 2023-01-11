@@ -127,7 +127,7 @@ toastr.options.onclick = function() { window.location.href = "/customer/orders";
                 <h5 class="modal-title"><b>Your cart</b></h5>
                 <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body ">
                 <input type="hidden" name="sharing group" id="oliphant_id_addnew_form_group_list">
                 <ul id="oliphant_id_cart_list"></ul>
             </div>
@@ -186,11 +186,39 @@ toastr.options.onclick = function() { window.location.href = "/customer/orders";
                         $('#oliphant_id_cart_list').append('<li>Your cart is empty</li>');
                     } else {
                         response.carts.forEach(element => {
-                        $('#oliphant_id_cart_list').append('<li value=' + element.menu_id + '>' + element.title+ '<span class="float-end"> X 1<i class="fa-solid fa-martini-glass"></i></span></li>');
+                        $('#oliphant_id_cart_list').append('<li value=' + element.menu_id + '>' + element.title+ '<span class="float-end" data-id='+element.id+'> X 1<i class="fa-solid fa-martini-glass"></i><i class="fa-solid fa-trash ms-5 oliphant_class_cart_list"></span></li>');
                     });
                     } 
                 }
             });
+            })
+
+            $('#oliphant_id_cart_list').on('click','.oliphant_class_cart_list' , function(e){
+                var li = $(this).parent().parent();
+                var id =$(this).parent().attr("data-id");
+                $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        
+            $.ajax({
+                type: "DELETE",
+                url: "/cart/"+id,
+                success: function (response) {
+                    if(response.status == 200) {
+                        li.remove();
+                        $('#oliphant_id_cart_btn').html('<i class="fa-solid fa-martini-glass"></i>'+response.carts.length);
+                        if(response.carts.length == 0){
+                            $('#oliphant_id_cart_list').append('<li>Your cart is empty</li>');
+                            $('#oliphant_id_place_order').addClass('tw-bg-disable');
+                            $('#oliphant_id_place_order').removeClass('tw-bg-laravel hover:tw-bg-dark');
+                            $('#oliphant_id_place_order').prop("disabled", true);
+                        }
+                    } 
+                }
+            });    
+
             })
 
             $('#oliphant_id_place_order').on('click', function(e){

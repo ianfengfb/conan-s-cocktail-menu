@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         @foreach ($menus as $menu)  
-        <div class="col-12 col-md-6 col-sm-4 mt-3">
+        <div class="col-12 col-md-4 col-sm-6 mt-3">
             <div class="card">
                 <img src="{{$menu->photo ? asset('storage/' . $menu->photo) : asset('/images/cocktails.jpeg')}}" class="card-img-top" alt="cocktail">
                 <div class="card-body">
@@ -74,7 +74,7 @@
             }
             $('#oliphant_id_cart_btn').html('<i class="fa-solid fa-martini-glass"></i>'+response.carts.length);
             response.carts.forEach(element => {
-                $('#oliphant_id_cart_list').append('<li value=' + element.menu_id + '>' + element.title+ '<span class="float-end"> X 1<i class="fa-solid fa-martini-glass"></i></span></li>');
+                $('#oliphant_id_cart_list').append('<li value=' + element.menu_id + '>' + element.title+ '<span class="float-end" data-id='+element.id+'> X 1<i class="fa-solid fa-martini-glass"></i><i class="fa-solid fa-trash ms-5 oliphant_class_cart_list"></span></li>');
             });
         }
     });

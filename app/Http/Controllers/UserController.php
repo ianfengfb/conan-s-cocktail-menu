@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -46,7 +47,13 @@ class UserController extends Controller
 
     // Show Login Form
     public function login() {
-        return view('users.login');
+        if(Auth::guest()) {
+            return view('users.login');
+        } else if (auth()->user()->email == 'conan@conan.com') {
+            return redirect('/workshop');
+        } else {
+            return redirect(('/customer/menus'));
+        }
     }
 
     // Authenticate User

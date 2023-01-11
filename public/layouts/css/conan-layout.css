@@ -1,0 +1,29 @@
+body {
+    font-size: 0.9rem;
+}
+
+.navbar a {
+    color: white;
+}
+
+.dropdown-menu a {
+    color: black;
+}
+
+.content-box {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    /* border: solid 1px green; */
+}
+
+.content-container {
+    flex-grow: 1;
+    /* border: solid 1px yellow; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

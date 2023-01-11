@@ -52,62 +52,63 @@
         Conan's cocktail Workshop
       </h1>
     </header>
-
-    <table class="tw-w-full tw-table-auto tw-rounded-sm" id="oliphant_id_workshop_table">
-      <tbody>
-        @unless($orders->isEmpty())
-        <tr class="tw-border-gray-300 tw-font-bold">
-            <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
-                <p>Cocktail name</p>
-            </td>
-            <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
-                <p>Order by</p>
-            </td>
-            <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
-                <p>Action</p>
-            </td>
-        </tr>
-        @foreach($orders as $order)
-        <tr class="tw-border-gray-300">
-          <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
-            <p class="recipe_link">{{$order->title}}</p>
-          </td>
-          <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
-            <p>{{$order->name}}</p>
-          </td>
-          <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300">
-            @if ($order->status == 0)
-            <button class="btn tw-bg-oliphant hover:tw-bg-black tw-text-white tw-text-xs tw-mb-2 oliphant_class_accept" value="{{$order->id}}">Accept</button>
-            <button class="btn tw-bg-laravel hover:tw-bg-dark tw-text-white tw-text-xs oliphant_class_decline" value="{{$order->id}}">Decline</button>
-            @elseif($order->status == 1)
-            <button class="btn tw-bg-oliphant hover:tw-bg-black tw-text-white tw-text-xs tw-mb-2 oliphant_class_ready" value="{{$order->id}}">Ready</button>
-            <button class="btn tw-bg-laravel hover:tw-bg-dark tw-text-white tw-text-xs oliphant_class_decline" value="{{$order->id}}">Cancel</button>
+    <div id="oliphant_id_table_container">
+        <table class="tw-w-full tw-table-auto tw-rounded-sm" id="oliphant_id_workshop_table">
+          <tbody>
+            @unless($orders->isEmpty())
+            <tr class="tw-border-gray-300 tw-font-bold">
+                <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
+                    <p>Cocktail name</p>
+                </td>
+                <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
+                    <p>Order by</p>
+                </td>
+                <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
+                    <p>Action</p>
+                </td>
+            </tr>
+            @foreach($orders as $order)
+            <tr class="tw-border-gray-300">
+              <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
+                <p class="recipe_link">{{$order->title}}</p>
+              </td>
+              <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
+                <p>{{$order->name}}</p>
+              </td>
+              <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300">
+                @if ($order->status == 0)
+                <button class="btn tw-bg-oliphant hover:tw-bg-black tw-text-white tw-text-xs tw-mb-2 oliphant_class_accept" value="{{$order->id}}">Accept</button>
+                <button class="btn tw-bg-laravel hover:tw-bg-dark tw-text-white tw-text-xs oliphant_class_decline" value="{{$order->id}}">Decline</button>
+                @elseif($order->status == 1)
+                <button class="btn tw-bg-oliphant hover:tw-bg-black tw-text-white tw-text-xs tw-mb-2 oliphant_class_ready" value="{{$order->id}}">Ready</button>
+                <button class="btn tw-bg-laravel hover:tw-bg-dark tw-text-white tw-text-xs oliphant_class_decline" value="{{$order->id}}">Cancel</button>
+                @else
+                <button class="btn tw-bg-oliphant hover:tw-bg-black tw-text-white tw-text-xs tw-mb-2 oliphant_class_picked_up" value="{{$order->id}}">Picked up</button>
+                <button class="btn tw-bg-laravel hover:tw-bg-dark tw-text-white tw-text-xs oliphant_class_decline" value="{{$order->id}}">Cancel</button>
+                @endif
+    
+              </td>
+              {{-- <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
+                <form method="POST" action="/orders/{{$order->id}}">
+                  @csrf
+                  @method('DELETE')
+                  <button class="tw-text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
+                </form>
+              </td> --}}
+            </tr>
+            @endforeach
             @else
-            <button class="btn tw-bg-oliphant hover:tw-bg-black tw-text-white tw-text-xs tw-mb-2 oliphant_class_picked_up" value="{{$order->id}}">Picked up</button>
-            <button class="btn tw-bg-laravel hover:tw-bg-dark tw-text-white tw-text-xs oliphant_class_decline" value="{{$order->id}}">Cancel</button>
-            @endif
-
-          </td>
-          {{-- <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-sm">
-            <form method="POST" action="/orders/{{$order->id}}">
-              @csrf
-              @method('DELETE')
-              <button class="tw-text-red-500"><i class="fa-solid fa-trash"></i> Delete</button>
-            </form>
-          </td> --}}
-        </tr>
-        @endforeach
-        @else
-        <tr class="tw-border-gray-300">
-          <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-lg">
-            <p class="tw-text-center">No Orders Found</p>
-            <img src="{{asset('images/lying.jpeg')}}" alt="chill" class="tw-mx-auto">
-          </td>
-        </tr>
-        @endunless
-
-      </tbody>
-    </table>
+            <tr class="tw-border-gray-300">
+              <td class="tw-px-4 tw-py-8 tw-border-t tw-border-b tw-border-gray-300 tw-text-lg">
+                <p class="tw-text-center">No Orders Found</p>
+                <img src="{{asset('images/lying.jpeg')}}" alt="chill" class="tw-mx-auto">
+              </td>
+            </tr>
+            @endunless
+    
+          </tbody>
+        </table>
+    </div>
   </x-card>
 @endsection
 
@@ -142,7 +143,7 @@
       })
 
     // accept an order
-        $('.oliphant_class_accept').on('click', function(e){
+        $('#oliphant_id_table_container').on('click','.oliphant_class_accept', function(e){
             e.preventDefault();
 
             var id = $(this).val();
@@ -165,7 +166,7 @@
         })
 
          // show decline modal
-         $('.oliphant_class_decline').on('click', function(e){
+         $('#oliphant_id_table_container').on('click', '.oliphant_class_decline', function(e){
             e.preventDefault();
 
             $('#CancelModal').modal('show');
@@ -197,7 +198,7 @@
         })
 
         // ready an order
-        $('.oliphant_class_ready').on('click', function(e){
+        $('#oliphant_id_table_container').on('click','.oliphant_class_ready', function(e){
             e.preventDefault();
 
             var id = $(this).val();
@@ -220,7 +221,7 @@
         })
 
         // picked_up an order
-        $('.oliphant_class_picked_up').on('click', function(e){
+        $('#oliphant_id_table_container').on('click','.oliphant_class_picked_up',  function(e){
             e.preventDefault();
 
             var id = $(this).val();

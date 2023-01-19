@@ -1,10 +1,24 @@
-# LaraGigs app
+# Conan's cocktail menu app
 
-An app for listing Laravel gigs/jobs. This project is from my YouTube "[Laravel From Scratch 2022](https://www.youtube.com/watch?v=MYyJ4PuL4pY)" course.
+An app for my friend Conan who is quiet into making cocktails. Currently running published @ https://phplaravel-608300-3175778.cloudwaysapps.com/
 
-![Alt text](/public/images/screen.png "LaraGigs")
+![Alt text](/public/images/screenshot.png "Conan's workshop")
 
 ## Usage
+
+### Accounts
+
+Only the main account could accept orders, manage the cocktail menu, see all the orders and all the customers.
+
+All new registered accounts could only place new orders and see their own orders.
+
+To set up main account, go to UserController.php and replace main@mail.com email address.
+
+### Notifications
+
+Using Pusher to push real time notifications when order is placed or order status is changed.
+
+Make sure you config .env file (BROADCAST_DRIVER=pusher, PUSHER_APP_ID,KEY,SECRET and CLUSTER to your Pusher account information).
 
 ### Database Setup
 This app uses MySQL. To use something different, open up config/Database.php and change the default driver.
@@ -34,7 +48,3 @@ Upload the files to your document root, Valet folder or run
 ```
 php artisan serve
 ```
-
-## License
-
-The LaraGigs app is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

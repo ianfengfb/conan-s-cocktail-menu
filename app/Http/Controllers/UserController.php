@@ -49,7 +49,7 @@ class UserController extends Controller
     public function login() {
         if(Auth::guest()) {
             return view('users.login');
-        } else if (auth()->user()->email == 'conan@conan.com') {
+        } else if (auth()->user()->email == 'main@main.com') {
             return redirect('/workshop');
         } else {
             return redirect(('/customer/menus'));
@@ -65,7 +65,7 @@ class UserController extends Controller
 
         if(auth()->attempt($formFields)) {
             $request->session()->regenerate();
-            if($formFields['email'] == 'conan@conan.com') {
+            if($formFields['email'] == 'main@main.com') {
                 return redirect('/workshop')->with('message', 'The boss is now logged in!');
             } else {
                 return redirect('/customer/menus')->with('message', 'You are now logged in!');
